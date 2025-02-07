@@ -47,10 +47,15 @@ if __name__ == "__main__":
     x_train = [[10,9],[1,4],[10,1],[9,1],[10,2],[7,3]]
     y_train = ['F','F','F','V','P','P']
     
+    file_handler_ = open("Data.txt", "r")
+    
+    
     
     x_test = [[3,5]]
     
     knn = KNN(5)
     knn.fit(x_test,y_train)
     prediction = knn.predict(x_test)
-    print(';Predictions: ', prediction)
+   # print(';Predictions: ', prediction)
+   
+    print(file_handler_.read())
