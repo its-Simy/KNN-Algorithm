@@ -29,6 +29,8 @@ class KNN:
         distance = 0
         for i in range(len(point1)):
             distance += abs(point1[i] - point2[i])
+            
+        return distance
     
     #will take the points we would like to test and evaluate them
     def predict(self, x_test):
