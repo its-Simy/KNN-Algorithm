@@ -1,4 +1,7 @@
 import math
+#import matplotlib.pyplot as plt
+
+#from sklearn.neighbors import KNeighborsClassifier
 from collections import Counter
 
 
@@ -13,8 +16,8 @@ class KNN:
         self.training_data = x
         self.traning_label = y
         
-    #for the assingment i would have to change the input parameters to 4 instead of 2
-    
+
+    #calculates the distance between points to make the prediction, this specific way is called the euclidean distance 
     def euclidean_distance(self, point1, point2):
         distance = 0
         for i in range(len(point1)):
@@ -22,13 +25,20 @@ class KNN:
             
         return math.sqrt(distance)
     
+    def manhattan_distance(self, point1, point2):
+        distance = 0
+        for i in range(len(point1)):
+            distance += abs(point1[i] - point2[i])
+    
     #will take the points we would like to test and evaluate them
     def predict(self, x_test):
         predictions = []
         for test_point in x_test:
             distances = []
             for i, train_point in enumerate(self.training_data):
-                dist = self.euclidean_distance(test_point,train_point)
+                #dist = self.euclidean_distance(test_point,train_point)
+                dist = self.manhattan_distance(test_point, train_point)
+                
                 distances.append((dist,self.traning_label[i]))
             
             #tells the computer to sort by distance not by label    
@@ -47,15 +57,16 @@ if __name__ == "__main__":
     x_train = [[10,9],[1,4],[10,1],[9,1],[10,2],[7,3]]
     y_train = ['F','F','F','V','P','P']
     
-    file_handler_ = open("Data.txt", "r")
+    file_reader = open("Data.txt", "r")
     
     
     
     x_test = [[3,5]]
     
-    knn = KNN(5)
+    knn = KNN(1)
     knn.fit(x_test,y_train)
     prediction = knn.predict(x_test)
-   # print(';Predictions: ', prediction)
+    print(';Predictions: ', prediction)
    
-    print(file_handler_.read())
+    str = file_reader.read()
+    #print(str)
