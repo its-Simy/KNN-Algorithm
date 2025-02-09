@@ -65,6 +65,8 @@ if __name__ == "__main__":
     
     x_test = [[3,5]]
     
+    #Will have to adjust this so that it is the square root of the number of flowers 
+    #In this case should be square root of 150, but should be automized
     knn = KNN(1)
     knn.fit(x_test,y_train)
     prediction = knn.predict(x_test)
@@ -72,3 +74,6 @@ if __name__ == "__main__":
    
     str = file_reader.read()
     #print(str)
+    
+    #The following is going to be the inputs and answer for the tester to see if classification is working
+    #5.9,3,5.1,1.8,"Virginica"
