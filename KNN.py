@@ -53,14 +53,33 @@ class KNN:
             predictions.append(most_common_label)
         return predictions
     
-    def load_data(filename):
+    
+    def manipulate_data(self, data):
+        data_points = []
+        classification = []
+        
+        divider = len(data[0])-1
+    
+        for row in data:
+            classification.append(row[divider])
+            data_points.append(row[:divider])
+            
+            
+        return data_points, classification
+    
+    def load_data(self, filename):
        mylist = []
        with open(filename) as numbers:
-           numbers_data = csv.reader(numbers, delimiter = ',')
+           numbers_data = csv.reader(numbers)
+           next(numbers_data)
+           
+           
            for row in numbers_data:
-               mylist.append(row[0])
-           return mylist
-            
+               mylist.append(row)
+               
+           return self.manipulate_data(mylist)
+    
+    
         
     
 if __name__ == "__main__":
@@ -70,8 +89,16 @@ if __name__ == "__main__":
     #file_reader = open("iris-dataset.csv", "r")
     
     new_list = open('iris-dataset.csv','r')
-    for row in new_list:
-        print(row)
+    knn1 = KNN(1)
+    x_training_data, y_training_data = knn1.load_data('iris-dataset.csv')
+    knn1.fit(x_training_data,y_train)
+    tester = [5.9,3,5.1,1.8]
+    answer = knn1.predict(tester)
+    print(answer)
+    #print(knn1.manipulate_data(first))
+    
+    #for row in new_list:
+       # print(row)
     
     
     x_test = [[3,5]]
@@ -81,7 +108,7 @@ if __name__ == "__main__":
     knn = KNN(1)
     knn.fit(x_test,y_train)
     prediction = knn.predict(x_test)
-    #print(';Predictions: ', prediction)
+    #print('Predictions: ', prediction)
    
    # str = file_reader.read()
    # print(str)
