@@ -16,14 +16,7 @@ class KNN:
         self.traning_label = y
         
 
-    #calculates the distance between points to make the prediction, this specific way is called the euclidean distance 
-    def euclidean_distance(self, point1, point2):
-        distance = 0
-        for i in range(len(point1)):
-            distance += (point1[i] - point2[i]) ** 2
-            
-        return math.sqrt(distance)
-    
+    #calculates the distance between points to make the prediction 
     def manhattan_distance(self, point1, point2):
         distance = 0
         for i in range(len(point1)):
@@ -83,38 +76,23 @@ class KNN:
         
     
 if __name__ == "__main__":
-    x_train = [[10,9],[1,4],[10,1],[9,1],[10,2],[7,3]]
-    y_train = ['F','F','F','V','P','P']
     
-    #file_reader = open("iris-dataset.csv", "r")
+    #The following is going to be the inputs and answer for the tester to see if classification is working
+    #5.9,3,5.1,1.8,"Virginica"
     
     new_list = open('iris-dataset.csv','r')
     knn1 = KNN(1)
     x_training_data, y_training_data = knn1.load_data('iris-dataset.csv')
-    knn1.fit(x_training_data,y_train)
+    knn1.fit(x_training_data,y_training_data)
     tester = [5.9,3,5.1,1.8]
     answer = knn1.predict(tester)
     print(answer)
-    #print(knn1.manipulate_data(first))
     
-    #for row in new_list:
-       # print(row)
+
     
     
-    x_test = [[3,5]]
-    
-    #Will have to adjust this so that it is the square root of the number of flowers 
-    #In this case should be square root of 150, but should be automized
-    knn = KNN(1)
-    knn.fit(x_test,y_train)
-    prediction = knn.predict(x_test)
-    #print('Predictions: ', prediction)
-   
-   # str = file_reader.read()
-   # print(str)
     
     
-    #The following is going to be the inputs and answer for the tester to see if classification is working
-    #5.9,3,5.1,1.8,"Virginica"
+    
     
     
