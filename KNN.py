@@ -13,14 +13,14 @@ class KNN:
     #this will take the input and just save it locally
     def fit(self, x, y):
         self.training_data = x
-        self.traning_label = y
+        self.training_label = y
         
 
     #calculates the distance between points to make the prediction 
     def manhattan_distance(self, point1, point2):
         distance = 0
-        for i in range(len(point1)):
-            distance += abs(point1[i] - point2[i])
+        for p1,p2 in zip(point1,point2):
+            distance += abs(p1 - p2)
             
         return distance
     
@@ -31,7 +31,6 @@ class KNN:
             distances = []
             for i, train_point in enumerate(self.training_data):
                 dist = self.manhattan_distance(test_point, train_point)
-                
                 distances.append((dist,self.training_label[i]))
             
             #tells the computer to sort by distance not by label    
@@ -62,7 +61,7 @@ class KNN:
             for value in row[:divider]:
                 float_values.append(float(value))
                 
-            data_points.append(row[:divider])
+            data_points.append(float(value) for value in row[:divider])
             
             
         return data_points, classification
@@ -80,9 +79,7 @@ class KNN:
                mylist.append(row)
                
            return self.manipulate_data(mylist)
-    #Converts the data given that is a string into a float   
-    def string_to_float(self, data):
-        return [float (x) for x in data.split(",")]
+
     
     
         
@@ -102,13 +99,13 @@ if __name__ == "__main__":
     knn1.fit(x_training_data,y_training_data)
     
     #inputted information
-    input = "5.9,3,5.1,1.8"
+    input_data = "5.9,3,5.1,1.8"
     
     #converts the string into a float and seperates data
-    tester = knn1.string_to_float(input)
+    tester = [float(x) for x in input_data.split(",")]
     
     #makes the prediction
-    answer = knn1.predict(tester)
+    answer = knn1.predict([tester])
     
     #prints the prediction
     print(answer)
