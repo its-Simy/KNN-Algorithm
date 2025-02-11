@@ -80,6 +80,9 @@ class KNN:
                mylist.append(row)
                
            return self.manipulate_data(mylist)
+    #Converts the data given that is a string into a float   
+    def string_to_float(self, data):
+        return [float (x) for x in data.split(",")]
     
     
         
@@ -89,12 +92,25 @@ if __name__ == "__main__":
     #The following is going to be the inputs and answer for the tester to see if classification is working
     #5.9,3,5.1,1.8,"Virginica"
     
-    new_list = open('iris-dataset.csv','r')
-    knn1 = KNN(1)
+    #new_list = open('iris-dataset.csv','r')
+    knn1 = KNN(3)
+    
+    #loads the data
     x_training_data, y_training_data = knn1.load_data('iris-dataset.csv')
+    
+    #puts the data into the algorithm to use for training
     knn1.fit(x_training_data,y_training_data)
-    tester = "5.9,3,5.1,1.8"
+    
+    #inputted information
+    input = "5.9,3,5.1,1.8"
+    
+    #converts the string into a float and seperates data
+    tester = knn1.string_to_float(input)
+    
+    #makes the prediction
     answer = knn1.predict(tester)
+    
+    #prints the prediction
     print(answer)
     
 
